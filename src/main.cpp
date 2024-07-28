@@ -6,12 +6,36 @@
 int main(int argc, char **argv)
 {
     std::string login;
-    std::string password = "12345";
-    std::hash<std::string> hash_pass;
+    std::hash<std::string> hasher;
+    size_t resultHash;
+    int action;
 
-    size_t res = hash_pass(password);
+    std::cout << "Select registration or sing in (0/1): \n";
+    std::cin >> action;
+    std::cout << "Enter your login: ";
+    std::cin >> login;
+    std::cout << "Enter your password: ";
+    std::string pas;
+    std::cin >> pas;
+    resultHash = hasher(pas);
+    pas = "                           ";     // clear if it really work and secure
+    if (action == 0)
+    {
+        
+        std::ofstream f;
+        f.open("base.txt");
+        if (!f.is_open()) 
+        {  
+            std::cerr << "Error open file for write\n";
+            return -1;
+        }
+        f << login << " " << resultHash << '\n';
+        f.close();
+    }
+    else 
+    {
 
-    std::cout << "Your hash: " << res << std::endl;
+    }
 
     return 0;
 }
